@@ -5,14 +5,20 @@ import { useForm } from "../../hooks/useForm";
 export const TodosList = () => {
 
     const { todosState, todosActions } = useContext(AppContext);
-    const [isEditing, setIsEditing] = useState(false);
+    const [editing, setEditing] = useState({
+        isEditing: false,
+        editingId: 0
+    });
 
     const { description, setFormState, onInputChange, onResetForm } = useForm({
         description: "",
     });
 
     const handleStartEditing = ( todo ) => {
-        setIsEditing(true);
+        setEditing({
+            isEditing: true,
+            editingId: todo.id
+        });
         setFormState({
             description: todo.description
         });
@@ -20,10 +26,15 @@ export const TodosList = () => {
 
 
     const handleDoneEditing = ( todo ) => {
-        editedTodo = {
+        const editedTodo = {
             ...todo,
             description: description,
-        };
+        }
+        todosActions.edit(editedTodo);
+        setEditing({
+            isEditing: false,
+            editingId: 0
+        });
     };
 
   return (
@@ -31,17 +42,17 @@ export const TodosList = () => {
         { todosState.map( todo => (<li 
             key={ todo.id } 
         >
-            { isEditing 
+            { editing.isEditing && editing.editingId === todo.id
                 ? (<>
                     <input type="text" name="description" value={ description } onChange={ onInputChange } />
-                    <button>Done</button>
+                    <button onClick={ () => handleDoneEditing(todo) } >Done</button>
                 </>)
                 : (<span>{ todo.description }</span>)
             }
-            <button onClick={ () => handleStartEditing(todo) } >
+            <button onClick={ () => handleStartEditing(todo) } hidden={ editing.isEditing } >
                 Edit
             </button>
-            <button>
+            <button hidden={ editing.isEditing } >
                 Delete
             </button>
         </li>) ) }
