@@ -41,6 +41,10 @@ export const TodosList = () => {
         todosActions.setDone(todo);
     };
 
+    const handleDelete = ( todo ) => {
+        todosActions.deleteById(todo.id);
+    };
+
   return (
     <ul>
         { todosState.map( todo => (<li 
@@ -56,7 +60,7 @@ export const TodosList = () => {
             <button onClick={ () => handleStartEditing( todo ) } hidden={ editing.isEditing } >
                 Edit
             </button>
-            <button hidden={ editing.isEditing } >
+            <button onClick={ () => handleDelete( todo ) } hidden={ editing.isEditing } >
                 Delete
             </button>
         </li>) ) }

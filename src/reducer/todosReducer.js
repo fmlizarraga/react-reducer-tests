@@ -18,7 +18,7 @@ export const todosReducer = ( state = [], action ) => {
             return newState;
         }
 
-        case types.delete: {
+        case types.deleteById: {
             return state.filter(todo => todo.id !== action.payload);
         }
     
