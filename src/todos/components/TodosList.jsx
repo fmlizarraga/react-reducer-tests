@@ -37,6 +37,10 @@ export const TodosList = () => {
         });
     };
 
+    const handleDone = ( todo ) => {
+        todosActions.setDone(todo);
+    };
+
   return (
     <ul>
         { todosState.map( todo => (<li 
@@ -45,11 +49,11 @@ export const TodosList = () => {
             { editing.isEditing && editing.editingId === todo.id
                 ? (<>
                     <input type="text" name="description" value={ description } onChange={ onInputChange } />
-                    <button onClick={ () => handleDoneEditing(todo) } >Done</button>
+                    <button onClick={ () => handleDoneEditing( todo ) } >Done</button>
                 </>)
-                : (<span>{ todo.description }</span>)
+                : (<span onClick={ () => handleDone( todo ) } >{ todo.description }{ todo.isDone ? ' (done)' : '' }</span>)
             }
-            <button onClick={ () => handleStartEditing(todo) } hidden={ editing.isEditing } >
+            <button onClick={ () => handleStartEditing( todo ) } hidden={ editing.isEditing } >
                 Edit
             </button>
             <button hidden={ editing.isEditing } >

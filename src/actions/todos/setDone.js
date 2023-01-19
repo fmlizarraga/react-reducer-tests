@@ -5,7 +5,7 @@ export const setDone = ( input = {}, dispatch ) => {
         type: types.edit,
         payload: {
             ...input,
-            isDone: input.isDone,
+            isDone: !input.isDone,
         }
     });
 };
