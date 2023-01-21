@@ -6,21 +6,23 @@ import { TodosList } from "../components/TodosList";
 const useStyles = createStyles( theme => ({
   root: {
     position: 'absolute',
-    padding: 8,
+    padding: 0,
     margin: 0,
     minHeight: "100%",
-    maxHeight: "100vp",
+    maxHeight: "100vh",
+    width: "100%",
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
   },
   
   inner: {
     padding: 0,
+    margin: 8,
     position: 'relative',
-    height: '100%'
+    height: '100%',
   },
 
   content: {
-    padding: theme.spacing.sm,
+    margin: theme.spacing.sm,
     position: 'relative',
   }
 

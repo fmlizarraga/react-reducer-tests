@@ -69,8 +69,12 @@ export const TodosList = () => {
                                         </Badge>
                                     </Group>
                                     <Group mt="md" >
-                                        <ActionIcon variant="outline" color="blue" size={32} disabled={ editing.isEditing } onClick={ () => handleStartEditing( todo ) } ><IconCursorText size={24} /></ActionIcon>
-                                        <ActionIcon variant="outline" color="red" size={32} disabled={ editing.isEditing } onClick={ () => handleDelete( todo ) } ><IconSquareX size={24} /></ActionIcon>
+                                        <ActionIcon variant="outline" color="blue" size={32} disabled={ editing.isEditing } onClick={ () => handleStartEditing( todo ) } >
+                                            <IconCursorText size={24} />
+                                        </ActionIcon>
+                                        <ActionIcon variant="outline" color="red" size={32} disabled={ editing.isEditing } onClick={ () => handleDelete( todo ) } >
+                                            <IconSquareX size={24} />
+                                        </ActionIcon>
                                     </Group>
                             </>)}
                 </Card>
