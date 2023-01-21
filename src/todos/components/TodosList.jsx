@@ -51,32 +51,29 @@ export const TodosList = () => {
   return (
     <Grid>
         { todosState.map( todo => (
-        <Grid.Col
-            key={ todo.id } 
-            md={4}
-        >
-            <>
-                { editing.isEditing && editing.editingId === todo.id
-                    ? (<>
-                            <TextInput icon={ <IconCursorText size={14} /> } name="description" value={ description } onChange={ onInputChange } />
-                            <ActionIcon variant="filled" color="green" size={32} onClick={ () => handleDoneEditing( todo ) } ><IconSquareCheck size={24} /></ActionIcon>
-                        </>)
-                    : (<>
-                            {/* <span onClick={ () => handleDone( todo ) } >{ todo.description }{ todo.isDone ? ' (done)' : '' }</span> */}
-                            <Card shadow="sm" p="lg" radius="md" withBorder >
-                                <Group onClick={ () => handleDone( todo ) } >
-                                    <Text weight={500} >{ todo.description }</Text>
-                                    <Badge color={ todo.isDone ? "green" : "red" } variant="light" >
-                                        { todo.isDone ? "Done" : "Pending" }
-                                    </Badge>
-                                </Group>
-                                <Group mt="md" >
-                                    <ActionIcon variant="outline" color="blue" size={32} disabled={ editing.isEditing } onClick={ () => handleStartEditing( todo ) } ><IconCursorText size={24} /></ActionIcon>
-                                    <ActionIcon variant="outline" color="red" size={32} disabled={ editing.isEditing } onClick={ () => handleDelete( todo ) } ><IconSquareX size={24} /></ActionIcon>
-                                </Group>
-                            </Card>
-                        </>)}
-            </>
+            <Grid.Col
+                key={ todo.id } 
+                md={4}
+            >
+                <Card shadow="sm" p="lg" radius="md" withBorder >
+                    { editing.isEditing && editing.editingId === todo.id
+                        ? (<Group mb="md" mt="sm" >
+                                <TextInput icon={ <IconCursorText size={14} /> } name="description" value={ description } onChange={ onInputChange } />
+                                <ActionIcon variant="filled" color="green" size={32} onClick={ () => handleDoneEditing( todo ) } ><IconSquareCheck size={24} /></ActionIcon>
+                            </Group>)
+                        : (<>
+                                    <Group onClick={ () => handleDone( todo ) } >
+                                        <Text weight={500} >{ todo.description }</Text>
+                                        <Badge color={ todo.isDone ? "green" : "red" } variant="light" >
+                                            { todo.isDone ? "Done" : "Pending" }
+                                        </Badge>
+                                    </Group>
+                                    <Group mt="md" >
+                                        <ActionIcon variant="outline" color="blue" size={32} disabled={ editing.isEditing } onClick={ () => handleStartEditing( todo ) } ><IconCursorText size={24} /></ActionIcon>
+                                        <ActionIcon variant="outline" color="red" size={32} disabled={ editing.isEditing } onClick={ () => handleDelete( todo ) } ><IconSquareX size={24} /></ActionIcon>
+                                    </Group>
+                            </>)}
+                </Card>
             </Grid.Col>
         ))}
     </Grid>

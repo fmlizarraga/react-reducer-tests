@@ -9,9 +9,9 @@ export const TodosPage = () => {
     <>
         <AppHeader/>
 
-        <TodosList/>
-
         <TodosAdd/>
+
+        <TodosList/>
     </>
   )
 }

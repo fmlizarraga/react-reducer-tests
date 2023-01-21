@@ -31,7 +31,7 @@ export const TodosAdd = () => {
     };
 
   return (
-    <SimpleGrid cols={1} >
+    <SimpleGrid cols={1} mb="md" >
         <div>
             <Title order={3} >Add a new ToDo!</Title>
         </div>
