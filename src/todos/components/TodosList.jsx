@@ -71,11 +71,19 @@ export const TodosList = () => {
                             </Group>)
                         : (<>
                                     <Group onClick={ () => handleDone( todo ) } >
-                                        <Text weight={500} >{ todo.description }</Text>
+                                        <Text size="xl" weight={500} >{ todo.description }</Text>
                                         <Badge color={ todo.isDone ? "green" : "red" } variant="light" >
                                             { todo.isDone ? "Done" : "Pending" }
                                         </Badge>
                                     </Group>
+                                    <Card.Section px="lg" >
+                                        <Text size="xs" color="dimmed" >
+                                            Created: { Date(todo.created).toLocaleString() }
+                                        </Text>
+                                        <Text size="xs" color="dimmed" >
+                                            Last edited: { Date(todo.lastEdited).toLocaleString() }
+                                        </Text>
+                                    </Card.Section>
                                     <Group mt="md" >
                                         <ActionIcon variant="outline" color="blue" size={32} disabled={ editing.isEditing } onClick={ () => handleStartEditing( todo ) } >
                                             <IconCursorText size={24} />
