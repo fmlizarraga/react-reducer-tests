@@ -51,7 +51,8 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export const AppHeader = () => {
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
+  console.log(theme.colors.dark)
   return (
     <Header
       height={56}
