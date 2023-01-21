@@ -7,8 +7,6 @@ export const TodosPage = () => {
 
   return (
     <>
-        {/* <NavbarMinimal/> */}
-
         <AppHeader/>
 
         <TodosList/>

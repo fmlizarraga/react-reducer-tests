@@ -1,6 +1,9 @@
 import { useContext, useState } from "react";
+import { ActionIcon, Badge, Card, Grid, Group, Text, TextInput } from "@mantine/core";
+
 import { AppContext } from "../../context/AppContext";
 import { useForm } from "../../hooks/useForm";
+import { IconCursorText, IconSquareCheck, IconSquareX } from "@tabler/icons";
 
 export const TodosList = () => {
 
@@ -46,24 +49,36 @@ export const TodosList = () => {
     };
 
   return (
-    <ul>
-        { todosState.map( todo => (<li 
+    <Grid>
+        { todosState.map( todo => (
+        <Grid.Col
             key={ todo.id } 
+            md={4}
         >
-            { editing.isEditing && editing.editingId === todo.id
-                ? (<>
-                    <input type="text" name="description" value={ description } onChange={ onInputChange } />
-                    <button onClick={ () => handleDoneEditing( todo ) } >Done</button>
-                </>)
-                : (<span onClick={ () => handleDone( todo ) } >{ todo.description }{ todo.isDone ? ' (done)' : '' }</span>)
-            }
-            <button onClick={ () => handleStartEditing( todo ) } hidden={ editing.isEditing } >
-                Edit
-            </button>
-            <button onClick={ () => handleDelete( todo ) } hidden={ editing.isEditing } >
-                Delete
-            </button>
-        </li>) ) }
-    </ul>
+            <>
+                { editing.isEditing && editing.editingId === todo.id
+                    ? (<>
+                            <TextInput icon={ <IconCursorText size={14} /> } name="description" value={ description } onChange={ onInputChange } />
+                            <ActionIcon variant="filled" color="green" size={32} onClick={ () => handleDoneEditing( todo ) } ><IconSquareCheck size={24} /></ActionIcon>
+                        </>)
+                    : (<>
+                            {/* <span onClick={ () => handleDone( todo ) } >{ todo.description }{ todo.isDone ? ' (done)' : '' }</span> */}
+                            <Card shadow="sm" p="lg" radius="md" withBorder >
+                                <Group onClick={ () => handleDone( todo ) } >
+                                    <Text weight={500} >{ todo.description }</Text>
+                                    <Badge color={ todo.isDone ? "green" : "red" } variant="light" >
+                                        { todo.isDone ? "Done" : "Pending" }
+                                    </Badge>
+                                </Group>
+                                <Group mt="md" >
+                                    <ActionIcon variant="outline" color="blue" size={32} disabled={ editing.isEditing } onClick={ () => handleStartEditing( todo ) } ><IconCursorText size={24} /></ActionIcon>
+                                    <ActionIcon variant="outline" color="red" size={32} disabled={ editing.isEditing } onClick={ () => handleDelete( todo ) } ><IconSquareX size={24} /></ActionIcon>
+                                </Group>
+                            </Card>
+                        </>)}
+            </>
+            </Grid.Col>
+        ))}
+    </Grid>
   )
 }

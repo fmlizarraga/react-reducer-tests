@@ -1,4 +1,4 @@
-import { Container, createStyles, Header, Title } from "@mantine/core"
+import { Container, createStyles, Header, Title } from "@mantine/core";
 import { IconClipboardCheck } from "@tabler/icons";
 
 const useStyles = createStyles((theme) => ({

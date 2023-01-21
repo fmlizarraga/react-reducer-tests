@@ -1,6 +1,7 @@
+import { useContext } from "react";
 import { ActionIcon, createStyles, Flex, SimpleGrid, TextInput, Title } from "@mantine/core";
 import { IconClipboardList, IconSquarePlus } from "@tabler/icons";
-import { useContext } from "react";
+
 import { AppContext } from "../../context/AppContext";
 import { useForm } from "../../hooks/useForm";
 
@@ -45,7 +46,7 @@ export const TodosAdd = () => {
                     wrap="wrap"
                 >
                     <TextInput placeholder="I have to..." icon={ <IconClipboardList size={14} /> } name="description" value={ description } onChange={ onInputChange } />
-                    <ActionIcon type="submit" variant="filled" className={ classes.button } ><IconSquarePlus size={20} /></ActionIcon>
+                    <ActionIcon type="submit" variant="filled" size={36} className={ classes.button } ><IconSquarePlus size={24} /></ActionIcon>
                 </Flex>
             </form>
         </div>
