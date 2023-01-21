@@ -1,7 +1,6 @@
 import { create } from "./create";
 import { deleteById } from "./deleteById";
 import { edit } from "./edit";
-import { saveAll } from "./saveAll";
 import { setDone } from "./setDone";
 
 const action = ( dispatch ) => {
@@ -10,7 +9,6 @@ const action = ( dispatch ) => {
         edit: ( input ) => edit( input, dispatch ),
         setDone: ( input ) => setDone( input, dispatch ),
         deleteById: ( id ) => deleteById( id, dispatch ),
-        saveAll: (data) => saveAll(data),
     }
 };
 

@@ -4,7 +4,7 @@ import { IconCursorText, IconSquareCheck, IconSquareX } from "@tabler/icons";
 
 import { AppContext } from "../../context/AppContext";
 import { useForm } from "../../hooks/useForm";
-import { saveAll } from "../../actions/todos/saveAll";
+import { useLocalStorage } from "@mantine/hooks";
 
 export const TodosList = () => {
 
@@ -17,6 +17,8 @@ export const TodosList = () => {
     const { description, setFormState, onInputChange, onResetForm } = useForm({
         description: "",
     });
+
+    const [ localTodos, setLocalTodos ] = useLocalStorage({ key: 'todos', defaultValue: [] });
 
     const handleStartEditing = ( todo ) => {
         setEditing({
@@ -50,7 +52,7 @@ export const TodosList = () => {
     };
 
     useEffect(() => {
-        saveAll(todosState);
+        setLocalTodos(todosState);
     }, [todosState])
     
 
