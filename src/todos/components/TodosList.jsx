@@ -1,9 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ActionIcon, Badge, Card, Grid, Group, Text, TextInput } from "@mantine/core";
 import { IconCursorText, IconSquareCheck, IconSquareX } from "@tabler/icons";
 
 import { AppContext } from "../../context/AppContext";
 import { useForm } from "../../hooks/useForm";
+import { saveAll } from "../../actions/todos/saveAll";
 
 export const TodosList = () => {
 
@@ -47,6 +48,11 @@ export const TodosList = () => {
     const handleDelete = ( todo ) => {
         todosActions.deleteById(todo.id);
     };
+
+    useEffect(() => {
+        saveAll(todosState);
+    }, [todosState])
+    
 
   return (
     <Grid>
