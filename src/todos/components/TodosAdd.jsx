@@ -1,8 +1,18 @@
+import { ActionIcon, createStyles, Flex, SimpleGrid, TextInput, Title } from "@mantine/core";
+import { IconClipboardList, IconSquarePlus } from "@tabler/icons";
 import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
-import { useForm } from "../../hooks/useForm"
+import { useForm } from "../../hooks/useForm";
+
+const useStyles = createStyles( ( theme ) => ({
+    button: {
+        backgroundColor: theme.fn.variant({ variant: 'filled', color: theme.primaryColor }).background,
+    }
+}));
 
 export const TodosAdd = () => {
+
+    const { classes } = useStyles();
 
     const { todosActions } = useContext( AppContext );
 
@@ -20,22 +30,25 @@ export const TodosAdd = () => {
     };
 
   return (
-    <form onSubmit={ handleNewTodo } >
-        <h3>Add a new todo</h3>
-        <hr />
-
-        <input
-            type="text"
-            name="description"
-            value={ description }
-            onChange={ onInputChange }
-        />
-
-        <button
-            type="submit"
-        >
-            Add
-        </button>
-    </form>
+    <SimpleGrid cols={1} >
+        <div>
+            <Title order={3} >Add a new ToDo!</Title>
+        </div>
+        <div>
+            <form onSubmit={ handleNewTodo } >
+                <Flex
+                    mih={50}
+                    gap="sm"
+                    justify="flex-start"
+                    align="center"
+                    direction="row"
+                    wrap="wrap"
+                >
+                    <TextInput placeholder="I have to..." icon={ <IconClipboardList size={14} /> } name="description" value={ description } onChange={ onInputChange } />
+                    <ActionIcon type="submit" variant="filled" className={ classes.button } ><IconSquarePlus size={20} /></ActionIcon>
+                </Flex>
+            </form>
+        </div>
+    </SimpleGrid>
   )
 }
