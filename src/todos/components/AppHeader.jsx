@@ -57,7 +57,7 @@ export const AppHeader = () => {
     <Header
       height={56}
       className={ classes.header }
-      mb={60}
+      mb={30}
     >
       <Container>
         <div className={ classes.inner } >

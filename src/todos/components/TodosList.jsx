@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
 import { ActionIcon, Badge, Card, Grid, Group, Text, TextInput } from "@mantine/core";
+import { IconCursorText, IconSquareCheck, IconSquareX } from "@tabler/icons";
 
 import { AppContext } from "../../context/AppContext";
 import { useForm } from "../../hooks/useForm";
-import { IconCursorText, IconSquareCheck, IconSquareX } from "@tabler/icons";
 
 export const TodosList = () => {
 
@@ -57,7 +57,7 @@ export const TodosList = () => {
             >
                 <Card shadow="sm" p="lg" radius="md" withBorder >
                     { editing.isEditing && editing.editingId === todo.id
-                        ? (<Group mb="md" mt="sm" >
+                        ? (<Group mb="xs" mt="sm" >
                                 <TextInput icon={ <IconCursorText size={14} /> } name="description" value={ description } onChange={ onInputChange } />
                                 <ActionIcon variant="filled" color="green" size={32} onClick={ () => handleDoneEditing( todo ) } ><IconSquareCheck size={24} /></ActionIcon>
                             </Group>)

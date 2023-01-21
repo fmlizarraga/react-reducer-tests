@@ -6,9 +6,12 @@ import { AppContext } from "../../context/AppContext";
 import { useForm } from "../../hooks/useForm";
 
 const useStyles = createStyles( ( theme ) => ({
+    root: {
+        padding: 0,
+    },
     button: {
         backgroundColor: theme.fn.variant({ variant: 'filled', color: theme.primaryColor }).background,
-    }
+    },
 }));
 
 export const TodosAdd = () => {
@@ -31,7 +34,7 @@ export const TodosAdd = () => {
     };
 
   return (
-    <SimpleGrid cols={1} mb="md" >
+    <SimpleGrid className={ classes.root } cols={1} mb="md" >
         <div>
             <Title order={3} color="white" >Add a new ToDo!</Title>
         </div>
