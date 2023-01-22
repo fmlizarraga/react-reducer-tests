@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { ActionIcon, createStyles, Flex, SimpleGrid, TextInput, Title } from "@mantine/core";
+import { ActionIcon, createStyles, Flex, Group, SimpleGrid, TextInput, Title } from "@mantine/core";
+import { useForm } from "@mantine/form";
 import { IconClipboardList, IconSquarePlus } from "@tabler/icons";
 
 import { AppContext } from "../../context/AppContext";
-import { useForm } from "../../hooks/useForm";
 
 const useStyles = createStyles( ( theme ) => ({
     root: {
@@ -20,17 +20,21 @@ export const TodosAdd = () => {
 
     const { todosActions } = useContext( AppContext );
 
-    const { description, onInputChange, onResetForm } = useForm({
-        description: ""
+    const { getInputProps, onSubmit, reset: resetForms } = useForm({
+        initialValues: {
+            description: '',
+        },
+
+        validate: {
+            description: ( value ) => ( value.length < 3 ? 'Description must have at least 3 lettrs.' : null ),
+        }
     });
 
-    const handleNewTodo = (event) => {
-        event.preventDefault();
-
+    const handleNewTodo = ({ description }) => {
         todosActions.create({
             description: description,
         });
-        onResetForm();
+        resetForms();
     };
 
   return (
@@ -39,18 +43,11 @@ export const TodosAdd = () => {
             <Title order={3} color="white" >Add a new ToDo!</Title>
         </div>
         <div>
-            <form onSubmit={ handleNewTodo } >
-                <Flex
-                    mih={50}
-                    gap="sm"
-                    justify="flex-start"
-                    align="center"
-                    direction="row"
-                    wrap="wrap"
-                >
-                    <TextInput placeholder="I have to..." icon={ <IconClipboardList size={14} /> } name="description" value={ description } onChange={ onInputChange } />
-                    <ActionIcon type="submit" variant="filled" size={36} className={ classes.button } ><IconSquarePlus size={24} /></ActionIcon>
-                </Flex>
+            <form onSubmit={ onSubmit(handleNewTodo) } >
+                    <Group>
+                        <TextInput placeholder="I have to..." icon={ <IconClipboardList size={14} /> } label="Description" name="description" {...getInputProps('description')} />
+                        <ActionIcon mt={14} type="submit" variant="filled" size={48} className={ classes.button } ><IconSquarePlus size={32} /></ActionIcon>
+                    </Group>
             </form>
         </div>
     </SimpleGrid>

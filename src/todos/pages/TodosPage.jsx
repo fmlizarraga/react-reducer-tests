@@ -9,7 +9,7 @@ const useStyles = createStyles( theme => ({
     padding: 0,
     margin: 0,
     minHeight: "100%",
-    maxHeight: "100vh",
+    maxHeight: "100vp",
     width: "100%",
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
   },

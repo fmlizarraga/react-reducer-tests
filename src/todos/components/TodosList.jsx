@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { ActionIcon, Badge, Card, Grid, Group, Text, TextInput } from "@mantine/core";
+import { useForm } from "@mantine/form";
 import { IconCursorText, IconSquareCheck, IconSquareX } from "@tabler/icons";
 
 import { AppContext } from "../../context/AppContext";
-import { useForm } from "../../hooks/useForm";
 import { useLocalStorage } from "@mantine/hooks";
 
 export const TodosList = () => {
@@ -14,8 +14,13 @@ export const TodosList = () => {
         editingId: 0
     });
 
-    const { description, setFormState, onInputChange, onResetForm } = useForm({
-        description: "",
+    const { getInputProps, onSubmit, reset:resetForms, setValues:setFormState } = useForm({
+        initialValues: {
+            description: '',
+        },
+        validate: {
+            description: ( value ) => ( value.length < 3 ? 'Description must have at least 3 lettrs.' : null ),
+        }
     });
 
     const [ localTodos, setLocalTodos ] = useLocalStorage({ key: 'todos', defaultValue: [] });
@@ -31,7 +36,7 @@ export const TodosList = () => {
     };
 
 
-    const handleDoneEditing = ( todo ) => {
+    const handleDoneEditing = ( { description }, todo ) => {
         const editedTodo = {
             ...todo,
             description: description,
@@ -65,10 +70,12 @@ export const TodosList = () => {
             >
                 <Card shadow="sm" p="lg" radius="md" withBorder >
                     { editing.isEditing && editing.editingId === todo.id
-                        ? (<Group mb="xs" mt="sm" >
-                                <TextInput icon={ <IconCursorText size={14} /> } name="description" value={ description } onChange={ onInputChange } />
-                                <ActionIcon variant="filled" color="green" size={32} onClick={ () => handleDoneEditing( todo ) } ><IconSquareCheck size={24} /></ActionIcon>
-                            </Group>)
+                        ? ( <form onSubmit={ onSubmit((value)=>handleDoneEditing(value,todo)) } >
+                                <Group mb="xs" mt="sm" >
+                                    <TextInput icon={ <IconCursorText size={14} /> } name="description" { ...getInputProps('description') } />
+                                    <ActionIcon type="submit" variant="filled" color="green" size={32} ><IconSquareCheck size={24} /></ActionIcon>
+                                </Group>
+                            </form>)
                         : (<>
                                     <Group onClick={ () => handleDone( todo ) } >
                                         <Text size="xl" weight={500} >{ todo.description }</Text>
