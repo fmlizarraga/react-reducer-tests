@@ -78,10 +78,10 @@ export const TodosList = () => {
                                     </Group>
                                     <Card.Section px="lg" >
                                         <Text size="xs" color="dimmed" >
-                                            Created: { Date(todo.created).toLocaleString() }
+                                            Created: { new Date(todo.created).toLocaleString() }
                                         </Text>
                                         <Text size="xs" color="dimmed" >
-                                            Last edited: { Date(todo.lastEdited).toLocaleString() }
+                                            Last edited: { new Date(todo.lastEdited).toLocaleString() }
                                         </Text>
                                     </Card.Section>
                                     <Group mt="md" >
