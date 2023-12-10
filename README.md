@@ -15,4 +15,7 @@ I used Mantine and Tabler iconst for the UI.
 
 - Tabler/Icons 1.119
 
+## Online version
+[https://react-mytdos-311a30.netlify.app/](https://react-mytdos-311a30.netlify.app/)
+
 ### 2023 - Franco Matias Lizarraga
